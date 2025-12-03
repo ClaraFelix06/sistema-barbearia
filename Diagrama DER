@@ -1,0 +1,53 @@
+@startuml
+
+/'Diagrama DER'/
+entity Cliente {
+  *id : int
+  --
+  nome : String
+  telefone : String
+  email : String
+}
+
+entity Barbeiro {
+  *id : int
+  --
+  nome : String
+}
+
+entity Servico {
+  *id : int
+  --
+  nome : String
+  preco : double
+  duracao : int
+}
+
+entity Agendamento {
+  *id : int
+  --
+  data : Date
+  hora : String
+  status : String
+  idCliente : int
+  idBarbeiro : int
+  idServico : int
+}
+
+entity HorarioDisponivel {
+  *id : int
+  --
+  data : Date
+  horaio : String
+  disponivel : boolean
+  idBarbeiro : int
+}
+
+' RELACIONAMENTOS DO DER
+Cliente ||--o{ Agendamento : "faz"
+Barbeiro ||--o{ Agendamento : "executa"
+Servico ||--o{ Agendamento : "inclui"
+
+Barbeiro ||--o{ HorarioDisponivel : "possui"
+
+@enduml
