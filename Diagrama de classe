@@ -1,3 +1,58 @@
 @startuml
+class Cliente {
+- id: int 
+- nome: String
+- telefone: String
+- email: String
+
++ cadastrar(): void
+}
+
+class Barbeiro {
+- id:int
+- nome: String
+
++definirHorario(): void
++criarAgendamento(): void
++cancelarAgendamento(): void
+}
+ class Agendamento{
+- id: int  
+- data: Date
+- hora: String
+- status: String
+- idCliente: int
+- idBarbeiro: int
+- idServico: int
+
++ confirmar():void
++ cancelar():void
++ remarcar():void
+}
+
+ class Servico {
+- id: int
+- nome: String
+- preco: double 
+- duracao: int
+}
+
+class HorarioDisponivel{
+- id: int
+- data: Date
+- horaio: String
+- disponivel: boolean
+- idBarbeiro: int
+
++ bloquearHorario():void
++ liberarHorario():void
+}
+
+/' Relacionamentos das classes'/
+Cliente "1" -- "*" Agendamento
+Cliente "1" -- "*" Servico
+Barbeiro "1" -- "*" Agendamento
+Barbeiro "1" -- "*" HorarioDisponivel
+Servico "1" -- "*" Agendamento
 
 @enduml
