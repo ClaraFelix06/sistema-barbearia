@@ -47,7 +47,7 @@ fork
   -->[Agenda]
   :Abrir tela de agendamento;
   :Selecionar cliente cadastrado;
-  :Selecionar serviço\n(corte, barba, corte+barba);
+  :Selecionar serviço\n(corte, barba, sobrancelha);
   :Escolher data e horário;
   :Confirmar agendamento;
   :Salvar no banco de dados;
