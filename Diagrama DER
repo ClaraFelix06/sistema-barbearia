@@ -38,7 +38,7 @@ entity HorarioDisponivel {
   *id : int
   --
   data : Date
-  horaio : String
+  horario : String
   disponivel : boolean
   idBarbeiro : int
 }
