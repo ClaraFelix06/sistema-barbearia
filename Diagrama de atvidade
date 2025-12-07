@@ -1,0 +1,58 @@
+@startuml
+
+start
+
+:Exibir Tela de Menu;
+
+fork
+  -->[Clientes]
+
+  if (Cadastrar novo cliente?) then (Sim)
+      :Exibir formulário de cadastro;
+      :Preencher nome, telefone e email;
+      :Salvar cliente no banco;
+  endif
+
+  if (Editar cliente?) then (Sim)
+      :Exibir tela de edição;
+      :Atualizar informações;
+      :Salvar alterações;
+  endif
+
+  if (Excluir cliente?) then (Sim)
+      :Exibir mensagem de confirmação;
+      if (Confirmado?) then (Sim)
+          :Excluir cliente do banco;
+      else (Não)
+          :Cancelar exclusão;
+      endif
+  endif
+end fork
+
+fork
+  -->[Visão Geral]
+  :Exibir lista de agendamentos\nordenados por data e horário;
+
+  if (Excluir agendamento?) then (Sim)
+      :Exibir confirmação de exclusão;
+      if (Confirmado?) then (Sim)
+          :Excluir agendamento do banco;
+      else (Não)
+          :Cancelar exclusão;
+      endif
+  endif
+end fork
+
+fork
+  -->[Agenda]
+  :Abrir tela de agendamento;
+  :Selecionar cliente cadastrado;
+  :Selecionar serviço\n(corte, barba, sobrancelha);
+  :Escolher data e horário;
+  :Confirmar agendamento;
+  :Salvar no banco de dados;
+end fork
+
+:Retornar ao Menu;
+stop
+@enduml
