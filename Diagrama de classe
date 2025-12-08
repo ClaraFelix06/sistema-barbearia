@@ -1,58 +1,65 @@
 @startuml
+
 class Cliente {
-- id: int 
-- nome: String
-- telefone: String
-- email: String
+    - id: int
+    - nome: String
+    - telefone: String
+    - email: String
 
-+ cadastrar(): void
+    + Cliente(nome, telefone, email)
+    + atualizarDados(nome, telefone, email)
 }
-
 class Barbeiro {
-- id:int
-- nome: String
-
-+definirHorario(): void
-+criarAgendamento(): void
-+cancelarAgendamento(): void
-}
- class Agendamento{
-- id: int  
-- data: Date
-- hora: String
-- status: String
-- idCliente: int
-- idBarbeiro: int
-- idServico: int
-
-+ confirmar():void
-+ cancelar():void
-+ remarcar():void
+    - id: int
+    - nome: String
 }
 
- class Servico {
-- id: int
-- nome: String
-- preco: double 
-- duracao: int
+class Servico {
+    - id: int
+    - nome: String
+    - preco: double
+    - duracao: int  
 }
 
-class HorarioDisponivel{
-- id: int
-- data: Date
-- horaio: String
-- disponivel: boolean
-- idBarbeiro: int
+class Agendamento {
+    - id: int
+    - data: Date
+    - horaInicio: String
+    - status: StatusAgendamento
+    - cliente: Cliente
+    - barbeiro: Barbeiro
+    - servico: Servico
 
-+ bloquearHorario():void
-+ liberarHorario():void
+    + confirmar(): void
+    + cancelar(): void
+}  
+
+class HorarioDisponivel {
+    - id: int
+    - data: Date
+    - horaInicio: String
+    - horaFim: String
+    - disponivel: boolean
+    - barbeiro: Barbeiro
+
+    + bloquear(): void
+    + liberar(): void
 }
 
-/' Relacionamentos das classes'/
-Cliente "1" -- "*" Agendamento
-Cliente "1" -- "*" Servico
-Barbeiro "1" -- "*" Agendamento
-Barbeiro "1" -- "*" HorarioDisponivel
-Servico "1" -- "*" Agendamento
+class GerenciadorAgendamentos {
+    + criarAgendamento(): void
+    + cancelarAgendamento(ag: Agendamento): void
+    + listarAgendamentos(barbeiro: Barbeiro): List<Agendamento>
+}
+
+
+
+Cliente "1" -- "*" Agendamento : "possui"
+Barbeiro "1" -- "*" Agendamento : "executa"
+Servico "1" -- "*" Agendamento : "inclui"
+
+Barbeiro "1" -- "*" HorarioDisponivel : "tem"
+
+GerenciadorAgendamentos --> Agendamento : "cria/gerencia"
 
 @enduml
